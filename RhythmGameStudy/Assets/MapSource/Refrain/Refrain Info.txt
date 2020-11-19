@@ -1,0 +1,64 @@
+osu file format v14
+
+[General]
+AudioFilename: audio.mp3
+AudioLeadIn: 0
+PreviewTime: 35823
+Countdown: 0
+SampleSet: Soft
+StackLeniency: 0.7
+Mode: 3
+LetterboxInBreaks: 0
+SpecialStyle: 0
+WidescreenStoryboard: 0
+
+[Editor]
+DistanceSpacing: 1.4
+BeatDivisor: 4
+GridSize: 32
+TimelineZoom: 1.9
+
+[Metadata]
+Title:Ref:rain (TV Size)
+TitleUnicode:Ref:rain (TV Size)
+Artist:Aimer
+ArtistUnicode:Aimer
+Creator:-[ Peachy ]-
+Version:Rainy
+Source:恋は雨上がりのように
+Tags:ending koi wa ameagari no you ni Anime Season1 Summer 2018
+BeatmapID:1535762
+BeatmapSetID:727417
+
+[Difficulty]
+HPDrainRate:7
+CircleSize:4
+OverallDifficulty:7
+ApproachRate:5
+SliderMultiplier:1.60000000596046
+SliderTickRate:2
+
+[Events]
+//Background and Video events
+0,0,"BG.jpg",0,0
+Video,0,"Koi wa Ameagari no You ni Ending.mp4"
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Sound Samples
+
+[TimingPoints]
+847,769.230769230769,4,2,1,40,1,0
+36423,-333.333333333333,4,2,1,40,0,0
+36616,-250,4,2,1,40,0,0
+36808,-200,4,2,1,40,0,0
+37000,-166.666666666667,4,2,1,40,0,0
+37193,-142.857142857143,4,2,1,40,0,0
+37385,-125,4,2,1,40,0,0
+37577,-111.111111111111,4,2,1,40,0,0
+37770,-100,4,2,1,40,0,1
+60077,-100,4,2,1,40,0,0
+62385,-100,4,2,1,40,0,1
+80846,-100,4,2,1,40,0,0
