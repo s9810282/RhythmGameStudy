@@ -22,16 +22,6 @@ public class MapLoader : MonoBehaviour
 
     int currentLine;
 
-    // Start is called before the first frame update
-    IEnumerator Start()
-    {
-        Debug.Log(Vector3.Lerp(new Vector3(2, 0, 0), new Vector3(10,10,10), 0.5f));
-
-        LoadMap();
-
-        yield return new WaitForEndOfFrame();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -50,9 +40,16 @@ public class MapLoader : MonoBehaviour
         string strData = textData.text;
         string[] lineData = strData.Split('\n');
 
+        Debug.Log(lineData[0]) ;
+
         currentLine = 0;
 
         List<Note>[] lines = new List<Note>[keyCount];
+
+        lines[0] = new List<Note>();
+        lines[1] = new List<Note>();
+        lines[2] = new List<Note>();
+        lines[3] = new List<Note>();
 
         string[] data = new string[6];
         string duration;
@@ -60,20 +57,23 @@ public class MapLoader : MonoBehaviour
         while (currentLine < lineData.Length)
         {
             data = lineData[currentLine].Split(','); //라인을 읽어와서 저장
-            duration = data[5].Split(':')[0]; //롱노트가 끊나는 시간
+            //duration = data[5].Split(':')[0]; //롱노트가 끊나는 시간
 
-            GameObject noteObj = Instantiate(notePrefab); //노트 생성
+            GameObject noteObj = ObjectPool.Instance.GetObject(); //Instantiate(notePrefab); //노트 생성
+            noteObj.gameObject.SetActive(false);
+
             Note note;
+            note = noteObj.AddComponent<Note>();
 
-            if (duration != null) //스크맆트 할당
-                note = noteObj.AddComponent<Note>();
-            else
-            {
-                note = noteObj.AddComponent<LongNote>();
-                note.GetComponent<LongNote>().DurationTime = float.Parse(duration) / 1000;
-            }
+            //if (duration != null) //스크맆트 할당
+            //    note = noteObj.AddComponent<Note>();
+            //else
+            //{
+            //    note = noteObj.AddComponent<LongNote>();
+            //    note.GetComponent<LongNote>().DurationTime = float.Parse(duration) / 1000;
+            //}
 
-            note.PressTime = float.Parse(data[0]) / 1000;
+            note.PressTime = float.Parse(data[2]) / 1000;
 
 
             switch ((LineNumber)int.Parse(data[0])) //위치 세팅
@@ -95,6 +95,8 @@ public class MapLoader : MonoBehaviour
                     lines[3].Add(note);
                     break;
             }
+
+            currentLine++;
         }
 
         noteMap.Add(LineNumber.Line_One, lines[0]); //리스트에 추가
