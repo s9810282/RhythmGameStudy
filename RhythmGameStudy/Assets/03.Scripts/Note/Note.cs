@@ -70,9 +70,16 @@ public class Note : MonoBehaviour
             rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, lerpCount / 30);
             lerpCount++;
 
-            Debug.Log(time);
-            Debug.Log(lerpCount);
-            yield return new WaitForSeconds(0.0333f);
+            //Debug.Log("Lerp Count : " + lerpCount + " time : " + (time) + " y : " + rectTransform.anchoredPosition.y);
+
+            if (lerpCount == 16)
+            {
+                Debug.Log(time);
+                Time.timeScale = 0f;
+            }
+            yield return new WaitForSeconds(takenTime / 30);
         }
+
+        ObjectPool.Instance.ReturnObject(gameObject);
     }
 }
