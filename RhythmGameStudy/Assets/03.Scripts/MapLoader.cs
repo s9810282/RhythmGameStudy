@@ -63,7 +63,7 @@ public class MapLoader : MonoBehaviour
             noteObj.gameObject.SetActive(false);
 
             Note note;
-            note = noteObj.AddComponent<Note>();
+            note = noteObj.AddComponent<LongNote>();
 
             //if (duration != null) //스크맆트 할당
             //    note = noteObj.AddComponent<Note>();

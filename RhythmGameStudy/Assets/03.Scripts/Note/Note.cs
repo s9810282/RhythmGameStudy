@@ -49,8 +49,26 @@ public class Note : MonoBehaviour
 
     public void Init()
     {
+        noteImg = gameObject.GetComponent<Image>();
+
         rectTransform = gameObject.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = startPos;
+
+        switch (lineNum)
+        {
+            case LineNumber.Line_One:
+                noteImg.color = Color.black;
+                break;
+            case LineNumber.Line_Two:
+                noteImg.color = Color.white;
+                break;
+            case LineNumber.Line_Three:
+                noteImg.color = Color.black;
+                break;
+            case LineNumber.Line_Four:
+                noteImg.color = Color.white;
+                break;
+        }
     }
     public void SetLine(LineNumber lineNumber, Vector2 _startPos, Vector2 _endPos)
     {
@@ -67,16 +85,18 @@ public class Note : MonoBehaviour
     {
         while (lerpCount < 30)
         {
-            rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, lerpCount / 30);
             lerpCount++;
+            rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, lerpCount / 30);
+
 
             //Debug.Log("Lerp Count : " + lerpCount + " time : " + (time) + " y : " + rectTransform.anchoredPosition.y);
 
-            if (lerpCount == 16)
-            {
-                Debug.Log(time);
-                Time.timeScale = 0f;
-            }
+            //if (lerpCount == 15)
+            //{
+            //    Debug.Log(time);
+            //    Time.timeScale = 0f;
+            //}
+
             yield return new WaitForSeconds(takenTime / 30);
         }
 
