@@ -129,7 +129,7 @@ public class NoteCreator : MonoBehaviour
                 }
             }
 
-            if (noteMap_1.Count + noteMap_2.Count + noteMap_3.Count + noteMap_4.Count <= 0)
+            if (maxNoteCount_1 + maxNoteCount_2 + maxNoteCount_3 + maxNoteCount_4 <= 0)
             {
                 isStart = false;
             }

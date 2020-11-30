@@ -14,29 +14,31 @@ public enum LineNumber
 
 public class Note : MonoBehaviour
 {
-    [SerializeField] Image noteImg;
-    [SerializeField] RectTransform rectTransform;
+    [SerializeField] protected Image noteImg;
+    [SerializeField] protected RectTransform rectTransform;
 
-    [SerializeField] RectTransform a;
-    [SerializeField] RectTransform b;
+    [SerializeField] protected RectTransform a;
+    [SerializeField] protected RectTransform b;
 
-    [SerializeField] float speed;
-    [SerializeField] float takenTime = 1.0f;
+    [SerializeField] protected float speed;
+    [SerializeField] protected float takenTime = 1.0f;
 
     [SerializeField] protected float pressTime;
-    protected LineNumber lineNum;
+    [SerializeField] protected LineNumber lineNum;
 
-    Vector2 startPos;
-    Vector2 endPos;
+    [SerializeField] protected float lerpCount = 0;
 
-    [SerializeField] float lerpCount = 0;
+    protected Vector2 startPos;
+    protected Vector2 endPos;
+
+    protected float time = 0;
 
     public float PressTime { get => pressTime; set => pressTime = value; }
 
-    float time = 0;
+
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(DownNote());
     }
@@ -81,7 +83,7 @@ public class Note : MonoBehaviour
     }
 
 
-    IEnumerator DownNote()
+    public IEnumerator DownNote()
     {
         while (lerpCount < 30)
         {

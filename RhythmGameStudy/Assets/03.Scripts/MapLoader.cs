@@ -52,26 +52,27 @@ public class MapLoader : MonoBehaviour
         lines[3] = new List<Note>();
 
         string[] data = new string[6];
-        string duration;
+        string duration = null;
 
         while (currentLine < lineData.Length)
         {
             data = lineData[currentLine].Split(','); //라인을 읽어와서 저장
-            //duration = data[5].Split(':')[0]; //롱노트가 끊나는 시간
+            duration = data[5].Split(':')[0]; //롱노트가 끊나는 시간
+
 
             GameObject noteObj = ObjectPool.Instance.GetObject(); //Instantiate(notePrefab); //노트 생성
             noteObj.gameObject.SetActive(false);
 
             Note note;
-            note = noteObj.AddComponent<LongNote>();
+            //note = noteObj.AddComponent<Note>();
 
-            //if (duration != null) //스크맆트 할당
-            //    note = noteObj.AddComponent<Note>();
-            //else
-            //{
-            //    note = noteObj.AddComponent<LongNote>();
-            //    note.GetComponent<LongNote>().DurationTime = float.Parse(duration) / 1000;
-            //}
+            if (duration == "0") //스크맆트 할당
+                note = noteObj.AddComponent<Note>();
+            else
+            {
+                note = noteObj.AddComponent<LongNote>();
+                note.GetComponent<LongNote>().DurationTime = float.Parse(duration) / 1000;
+            }
 
             note.PressTime = float.Parse(data[2]) / 1000;
 
