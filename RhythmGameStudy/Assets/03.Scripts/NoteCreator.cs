@@ -40,7 +40,8 @@ public class NoteCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        TicManager.Instance.Time += Time.deltaTime;
+        time = TicManager.Instance.Time;
         text.text = time.ToString("N4");
     }
 

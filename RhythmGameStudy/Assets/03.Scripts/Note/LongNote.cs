@@ -37,16 +37,20 @@ public class LongNote : Note
         Debug.Log(count); //92
         Debug.Log(other); //16
 
-        rectTransform.sizeDelta = new Vector2(300, 7013.333f);
+        //rectTransform.sizeDelta = new Vector2(300, 7013.333f);
     }
 
     public IEnumerator DownLongNote()
     {
+        rectTransform.sizeDelta -= new Vector2(0f, (startPos.y - endPos.y) / 30) * 2;
+
         while (lerpCount < 30)
         {
             lerpCount++;
             rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, lerpCount / 30);
 
+            if (TicManager.Instance.Time - 2 <= durationTime)
+                rectTransform.sizeDelta += new Vector2(0f, (startPos.y - endPos.y) / 30);
 
             //Debug.Log("Lerp Count : " + lerpCount + " time : " + (time) + " y : " + rectTransform.anchoredPosition.y);
 
@@ -56,6 +60,7 @@ public class LongNote : Note
             //    Time.timeScale = 0f;
             //}
 
+
             yield return new WaitForSeconds(takenTime / 30);
         }
 
@@ -64,7 +69,8 @@ public class LongNote : Note
 
         lerpCount = 0;
 
-        StartCoroutine(DownLongNote());
+        if (TicManager.Instance.Time - 2 <= durationTime)
+            StartCoroutine(DownLongNote());
 
         //ObjectPool.Instance.ReturnObject(gameObject);
     }

@@ -69,6 +69,7 @@
     <Compile Include="Assets\03.Scripts\Note\Note.cs" />
     <Compile Include="Assets\03.Scripts\NoteCreator.cs" />
     <Compile Include="Assets\03.Scripts\ObjectPool.cs" />
+    <Compile Include="Assets\03.Scripts\TicManager.cs" />
     <None Include="Assets\Resources\Refrain.txt" />
     <None Include="Assets\MapSource\Refrain\Refrain Info.txt" />
     <Reference Include="UnityEngine">
