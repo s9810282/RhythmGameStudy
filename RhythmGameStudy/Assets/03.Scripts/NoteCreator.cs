@@ -41,8 +41,8 @@ public class NoteCreator : MonoBehaviour
     void Update()
     {
         TicManager.Instance.Time += Time.deltaTime;
-        time = TicManager.Instance.Time;
-        text.text = time.ToString("N4");
+        //time = TicManager.Instance.Time;
+        text.text = TicManager.Instance.Time.ToString("N4");
     }
 
     public void NoteRead()
@@ -79,7 +79,7 @@ public class NoteCreator : MonoBehaviour
 
             if (maxNoteCount_1 > 0)
             {
-                if (spaceTime - (takenTime / 2) + noteMap_1[0].PressTime < time)
+                if (spaceTime - (takenTime / 2) + noteMap_1[0].PressTime < TicManager.Instance.Time)
                 {
                     noteMap_1[0].gameObject.SetActive(true);
                     noteMap_1.RemoveAt(0);
@@ -90,7 +90,7 @@ public class NoteCreator : MonoBehaviour
 
             if (maxNoteCount_2 > 0)
             {
-                if (spaceTime - (takenTime / 2) + noteMap_2[0].PressTime < time)
+                if (spaceTime - (takenTime / 2) + noteMap_2[0].PressTime < TicManager.Instance.Time)
                 {
                     if (noteMap_2.Count <= 0)
                         break;
@@ -104,7 +104,7 @@ public class NoteCreator : MonoBehaviour
 
             if (maxNoteCount_3 > 0)
             {
-                if (spaceTime - (takenTime / 2) + noteMap_3[0].PressTime < time)
+                if (spaceTime - (takenTime / 2) + noteMap_3[0].PressTime < TicManager.Instance.Time)
                 {
                     if (noteMap_3.Count <= 0)
                         yield break;
@@ -118,7 +118,7 @@ public class NoteCreator : MonoBehaviour
 
             if (maxNoteCount_4 > 0)
             {
-                if (spaceTime - (takenTime / 2) + noteMap_4[0].PressTime < time)
+                if (spaceTime - (takenTime / 2) + noteMap_4[0].PressTime < TicManager.Instance.Time)
                 {
                     if (noteMap_4.Count <= 0)
                         yield break;

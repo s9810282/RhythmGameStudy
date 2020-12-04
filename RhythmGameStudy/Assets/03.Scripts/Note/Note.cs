@@ -59,16 +59,16 @@ public class Note : MonoBehaviour
         switch (lineNum)
         {
             case LineNumber.Line_One:
-                noteImg.color = Color.black;
+                noteImg.color = Color.red;
                 break;
             case LineNumber.Line_Two:
-                noteImg.color = Color.white;
+                noteImg.color = Color.yellow;
                 break;
             case LineNumber.Line_Three:
-                noteImg.color = Color.black;
+                noteImg.color = Color.blue;
                 break;
             case LineNumber.Line_Four:
-                noteImg.color = Color.white;
+                noteImg.color = Color.green;
                 break;
         }
     }
@@ -85,10 +85,10 @@ public class Note : MonoBehaviour
 
     public IEnumerator DownNote()
     {
-        while (lerpCount < 30)
+        while (lerpCount < 100)
         {
             lerpCount++;
-            rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, lerpCount / 30);
+            rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, lerpCount / 100);
 
 
             //Debug.Log("Lerp Count : " + lerpCount + " time : " + (time) + " y : " + rectTransform.anchoredPosition.y);
@@ -99,7 +99,7 @@ public class Note : MonoBehaviour
             //    Time.timeScale = 0f;
             //}
 
-            yield return new WaitForSeconds(takenTime / 30);
+            yield return new WaitForSeconds(takenTime / 100);
         }
 
         ObjectPool.Instance.ReturnObject(gameObject);

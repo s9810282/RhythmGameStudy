@@ -7,12 +7,15 @@ public class LongNote : Note
     [SerializeField] float durationTime;
 
 
+    Vector2 realStartPos;
 
     public float DurationTime { get => durationTime; set => durationTime = value; }
 
     // Start is called before the first frame update
     void OnEnable()
     {
+        realStartPos = startPos;
+
         SetContent();
         StartCoroutine(DownLongNote());
     }
@@ -20,38 +23,46 @@ public class LongNote : Note
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+
     }
 
     public void SetContent()
     {
-        //872ms ~ 3923ms = 3052ms
+        //847ms ~ 3923ms = 3076 
+        //1초당 100fps 기준
 
-        int diffence = (int)(durationTime * 1000) - (int)(pressTime * 1000);
-        int count = diffence / 33;
-        int other = diffence % 33;
+        float diffence = (durationTime - pressTime) * 1000; //ms 차이
+        float fps = diffence / 10f;                 //fps
 
-        float tmp = 81.33f / 33f;
+        //시작 지점과 끝지점의 거리 2460 / 100 = 24.6
 
-        Debug.Log(diffence); //3052
-        Debug.Log(count); //92
-        Debug.Log(other); //16
+        //1fps 당 24.6f만큼 움직임
+        float x = (24.6f * fps) / 100;  // 길이
+        float size = 100 * x;
 
-        //rectTransform.sizeDelta = new Vector2(300, 7013.333f);
+        Debug.Log(diffence); //3076
+        Debug.Log(fps);      //92.28001
+
+
+        rectTransform.sizeDelta = new Vector2(300f, size);
     }
 
     public IEnumerator DownLongNote()
     {
-        rectTransform.sizeDelta -= new Vector2(0f, (startPos.y - endPos.y) / 30) * 2;
 
-        while (lerpCount < 30)
+        while (lerpCount <= 100)
         {
-            lerpCount++;
-            rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, lerpCount / 30);
+            if (TicManager.Instance.Time - 2 >= durationTime)
+            {
+                ObjectPool.Instance.ReturnObject(gameObject);
+                yield break;
+            }
 
-            if (TicManager.Instance.Time - 2 <= durationTime)
-                rectTransform.sizeDelta += new Vector2(0f, (startPos.y - endPos.y) / 30);
+            lerpCount++;            
+            rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, lerpCount / 100);
 
+           
+                
             //Debug.Log("Lerp Count : " + lerpCount + " time : " + (time) + " y : " + rectTransform.anchoredPosition.y);
 
             //if (lerpCount == 15)
@@ -61,11 +72,11 @@ public class LongNote : Note
             //}
 
 
-            yield return new WaitForSeconds(takenTime / 30);
+            yield return new WaitForSeconds(takenTime / 100);
         }
 
         startPos = endPos;
-        endPos = new Vector2(endPos.x, endPos.y - 2440f);
+        endPos = new Vector2(endPos.x, endPos.y - 2460);
 
         lerpCount = 0;
 
